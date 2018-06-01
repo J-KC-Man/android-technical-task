@@ -4,7 +4,7 @@
 
 Create a 'light' version of the Moneybox app that will allow existing users to login and check their account balance as well as viewing their moneybox savings.
 
-### The app should have at the very least...
+### The app should have...
 - A login screen to allow existing users to login
 - A screen to show the accounts the user holds, e.g. ISA, GIA
 - A screen to show some detail of the account, including a simple button to add money to their moneybox.
