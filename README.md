@@ -16,9 +16,10 @@ A prototype wireframe is provided below and can be used as a guideline. You are 
 ![](https://s3.amazonaws.com/uploads.hipchat.com/402730/2470705/6JJwTcVMpFzsqba/ios%20wireframe.png)
 
 ##### What we are looking for:
+ - An android application written in either java or kotlin.
  - Demonstration of coding style.
- - Knowledge of common android libraries and others that you find useful.
- - Use of java or kotlin.
+ - Knowledge of common android libraries and any others that you find useful.
+ - Storage of data between screens.
  - Any form of unit or integration testing would be a bonus.
  - The application must run on Android 5.0 and above.
  - The application must compile and run in Android Studio.
