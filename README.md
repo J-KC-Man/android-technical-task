@@ -1,35 +1,90 @@
-# Moneybox Android Technical Challenge
+# The Brief:
 
-## The Brief:
+Create a mini version of the Moneybox app that will allow existing users to login, check their account and add money to their moneybox.
 
-Create a 'light' version of the Moneybox app that will allow existing users to login and check their account balance as well as viewing their moneybox savings.
+## Part A - Fix current bugs
 
-### The app should have...
-- A login screen to allow existing users to login
-- A screen to show the accounts the user holds, e.g. ISA, GIA
-- A screen to show some detail of the account, including a simple button to add money to their moneybox.
-  - The button should be add a fixed amount of say £10. It should use the `POST /oneoffpayments` endpoint (described below) and their Moneybox amount would be updated.
-- A user should be able to navigate between screens.
+In this repository you will find LoginActivity that allows users to enter their username, password and optionally their name.  We have implemented a basic screen for you that validates username, password and name against simple regular expressions but makes no calls to the API.
 
-A prototype wireframe is provided below and can be used as a guideline. You are free to change any elements of the screen and provide additional information if you wish.
+Unfortunately this screen has 3 bugs raised by our testers that they want you to fix.  They are listed below.  If you are struggling to fix any of these bugs, please give it your best attempt and then move onto the next bug or task.
+
+### Bug 1 - Layout does not look as expected
+
+Please re-arrange the views in the LoginActivity to match the expected layout.
+
+Expected Layout:
+
+### Bug 2 - Validation is incorrect
+If the input entered by the user is correct then they should see a toast saying “Input is valid!”.  However if it is not correct we should show an error on the field that is incorrect.  Below is the following validation logic:
+
+- Email is not optional and should match EMAIL_REGEX
+- Password is not optional and should match PASSWORD_REGEX
+- Name is optional, but if it contains any value it should match NAME_REGEX
+
+There is some validation logic in LoginActivity, but it is currently incorrect. Please implement this feature to match this logic.
+
+### Bug 3 - Animation is looping incorrectly
+
+Above the login button is an animation of an owl and a pig.  We would like this animation to play every time the user opens the activity and then loop indefinitely.  The logic for this animation should be as follows:
+
+- The animation should start from frame **0** to **109** when the user first starts the activity.  See below for animation.
+![](/images/firstpig.gif)
+- When the first stage of the animation has finished it should then loop from frame **131** to **158** continuously.  See below for animation.
+![](/images/secondpig.gif)
+
+To create animation in the app we use a helpful library called Lottie.  This has been added to the project for you, but currently it just plays the animation once and then stops.  Please implement the logic as described above.
+
+There is lots of helpful documentation on Lottie [here](http://airbnb.io/lottie/android/android.html#sample-app).  Please take a look at this page for information on how to loop the animation, play from a min and max frame and detect when an animation ends.
+
+## Part B - Add 2 new screens
+
+We now want to give some useful functionality to our users. To allow them to log into the app, view and edit their account.
+
+### Screen 2 - User accounts screen
+This screen should be shown after the user has successfully logged in and should show have the following functionality:
+- Show the **'TotalPlanValue'** of a user.
+- Show the accounts the user holds, e.g. ISA, GIA, LISA, Pension.
+- Show all of those account's **'PlanValue'**.
+- Shhow all of those account's **'Moneybox'** total.
+
+### Screen 3 - Individual account screen
+If a user selects one of those accounts, they should then be taken to this screen.  This screen should have the following functionality:
+- Show the **'Name'** of the account.
+- Show the account's **'PlanValue'**.
+- Show the accounts **'Moneybox'** total.
+- Allow a user to add to a fixed value (e.g. £10) to their moneybox total.
+
+A prototype wireframe of all 3 screens is provided as a guideline. You are free to change any elements of the screen and provide additional information if you wish.
 
 ![](/images/wireframe.png)
 
-##### What we are looking for:
- - An android application written in either java or kotlin.
- - Demonstration of coding style.
+## What we are looking for:
+ - An android application written in either Java or kotlin.
+ - Demonstration of coding style and design patterns.
  - Knowledge of common android libraries and any others that you find useful.
  - Storage of data between screens.
- - Any form of unit or integration testing would be a bonus.
+ - Consistency of data between screens.
+ - Error handling.
+ - Any form of unit or integration testing you see fit.
  - The application must run on Android 5.0 and above.
  - The application must compile and run in Android Studio.
 
-##### How to Submit your solution:
- - Create a public repo in github, bitbucket or a suitable alternative and provide a link to the repository.
- - Provide a readme in markdown which details the app that you have created and any necessary steps in order to launch or run the solution.
+Please feel free to refactor the LoginActivity or use any libraries/helper methods to make your life easier.
 
-### API Usage
-This a brief summary of api endpoints of the moneybox sandbox environment. There a lot of other additional properties from the json responses that are either not relevant to this technical task and some are marked as obsolete. You are free to use any information and you will not be penalised for misinterpreting  the information used.
+## How to Submit your solution:
+ - Create a public repo in github, bitbucket or a suitable alternative and provide a link to the repository.
+ - Provide a readme in markdown which details how you solved the bugs in part A, and explains the structure of your solution in Part B and any libraries that you may have used.
+
+## API Usage
+This a brief summary of the api endpoints in the moneybox sandbox environment. There a lot of other additional properties from the json responses that are not relevant, but you must use these endpoints to retrieve the information needed for this application.
+
+#### Base URL & Test User
+The base URL for the moneybox sandbox environment is `https://api-test01.moneyboxapp.com/` . You can log into test your app using the following user:
+|  Username          | Password         |
+| ------------- | ------------- |
+| test+android@moneyboxapp.com  | P455word12  |
+
+#### Headers
 
 In order to make requests https must be used and the following headers must be included in each request.
 
@@ -40,165 +95,43 @@ In order to make requests https must be used and the following headers must be i
 | appVersion | 4.11.0 |
 | apiVersion | 3.0.0 |
 
-### Authentication
-After obtaining a bearer token via `POST /users/login` (sample json response below), an Authorization header must be provided for all other endpoints.
-Note: The BearerToken has a sliding expiration of 5 mins.
+#### Authentication
+To login with this user to retrieve a bearer token you need to call `POST /users/login`.
+```
+POST /users/login
+{
+  "Email": "test+android@moneyboxapp.com",
+  "Password": "P455word12",
+  "Idfa": "ANYTHING"
+}
+```
+Sample json response
 ```
 "Session": {
         "BearerToken": "TsMWRkbrcu3NGrpf84gi2+pg0iOMVymyKklmkY0oI84=",
-        "ExternalSessionId": "4ff0eab7-7d3f-40c5-b87b-68d4a4961983", -- not used, obsolete
-        "SessionExternalId": "4ff0eab7-7d3f-40c5-b87b-68d4a4961983", -- not used, obsolete
-        "ExpiryInSeconds": 0 -- not used, obsolete
+        "ExternalSessionId": "4ff0eab7-7d3f-40c5-b87b-68d4a4961983", -- not used
+        "SessionExternalId": "4ff0eab7-7d3f-40c5-b87b-68d4a4961983", -- not used
+        "ExpiryInSeconds": 0 -- not used
     }
 ```
-
-Authorization Header to be used
+After obtaining a bearer token an Authorization header must be provided for all other endpoints along with the headers listed above (Note: The BearerToken has a sliding expiration of 5 mins).
 
 |  Key          | Value         |
 | ------------- | ------------- |
 | Authorization  | Bearer TsMWRkbrcu3NGrpf84gi2+pg0iOMVymyKklmkY0oI84=  |
 
-
-### API Endpoints
-#### Login
-Logs in an existing user
+#### Investor Products
+Provides product and account information for a user that will be needed for the two additional screens.
 ```
-POST /users/login
-{
-  "Email": "testing@moneyboxapp.com",
-  "Password": "supersafepassword1234",
-  "Idfa": "the idfa of the ios device"
-}
+GET /investorproducts
 ```
-Sample json response - has been trimmed down, and below are the core properties that are of use.
-```
-{
-    "User": {
-        "UserId": "74d21315-538e-4abc-a4a8-38cb0291216f",
-        "HasVerifiedEmail": true,
-        "IsPinSet": true,
-        "RegistrationStatus": "IsComplete",
-        "DateCreated": "2017-11-17T10:19:06.537",
-        "MoneyboxRegistrationStatus": "IsComplete",
-        "Email": "test+sample@moneyboxapp.com",
-        "FirstName": "Sample",
-        "LastName": "User",
-    },
-    "Session": {
-        "BearerToken": "Kcuf/DOjXgwDioE6wOdM1XyR/+ncwzdT0N9bJjl+O6g=", ----------> This is used for authentication
-        "ExternalSessionId": "0f1ae000-9eda-4f59-ad78-5773b9d71315", ----------> not used, obsolete
-        "SessionExternalId": "0f1ae000-9eda-4f59-ad78-5773b9d71315", ----------> not used, obsolete
-        "ExpiryInSeconds": 0 ----------> not used, obsolete
-    }
-}
-```
-
-### Logout
-Ends the current session for the user
-```
-POST users/logout
-```
-
-#### This Week
-Provides product and account information for a user. There are alot of properties, however, some notes have been used to describe some properties that you may want to use.
-```
-GET /investorproduct/thisweek
-```
-
-Sample json response
-```
-{
-    "Products": [
-        {
-            "InvestorProductId": 3229,
-            "InvestorProductType": "Isa",
-            "ProductId": 1,
-            "Moneybox": 130,  ----------> How much the user has saved this week so far and is the users 'Moneybox'
-            "PreviousMoneybox": 130, ----------> not used, obsolete
-            "SubscriptionAmount": 30,  ----------> What the current weekly subscription is set to
-            "PlanValue": 5235,  ----------> The current account balance
-            "Sytd": 1235,  ----------> How much the user has contributed in the current tax year
-            "TransferInSytd": 4000,  ----------> The amount the user has transfered from another provider
-            "MaximumWithdrawal": 0,
-            "MaximumDeposit": 14765,  ----------> The remaining amount that can be contributed to the current tax year
-            "TotalContributions": 0,
-            "TotalReturnValue": 0,
-            "TotalReturnPercentage": 0,
-            "CashInTransit": 0,
-            "ResidualCash": 0,
-            "TotalFees": 0,
-            "TotalReturnValueGross": 0,
-            "PendingWithdrawal": 0,
-            "IsPendingRebalance": false,
-            "PendingDeposit": 0,
-            "Product": {
-                "Name": "ISA",
-                "Type": "Isa",
-                "AnnualLimit": 20000,
-                "DepositLimit": 0,
-                "FriendlyName": "Stocks & Shares ISA"  
-            },
-            "DateModified": "2017-11-17T10:21:10.437",
-            "Valuations": [],
-            "IsSelected": true,
-            "IsFavourite": true
-        },
-        {
-            "InvestorProductId": 3230,
-            "InvestorProductType": "Gia",
-            "ProductId": 2,
-            "Moneybox": 20,
-            "PreviousMoneybox": 20,
-            "SubscriptionAmount": 50,
-            "PlanValue": 2000,
-            "Sytd": 2000,
-            "TransferInSytd": 0,
-            "MaximumWithdrawal": 0,
-            "MaximumDeposit": 20000,
-            "TotalContributions": 0,
-            "TotalReturnValue": 0,
-            "TotalReturnPercentage": 0,
-            "CashInTransit": 0,
-            "ResidualCash": 0,
-            "TotalFees": 0,
-            "TotalReturnValueGross": 0,
-            "PendingWithdrawal": 0,
-            "IsPendingRebalance": false,
-            "PendingDeposit": 0,
-            "Product": {
-                "Name": "GIA",
-                "Type": "Gia",
-                "AnnualLimit": 0,
-                "DepositLimit": 20000,
-                "FriendlyName": "General Investment Account"
-            },
-            "DateModified": "2017-11-17T10:21:48.650",
-            "Valuations": [],
-            "IsSelected": false,
-            "IsFavourite": false
-        }
-    ],
-    "SelectedInvestorProductId": 3229,
-    "FavouriteInvestorProductId": 3229,
-    "Transactions": [],
-    "Links": []
-}
-}
-```
-
 ### One off payments
 Adds a one off amount to the users moneybox.
 ```
 POST /oneoffpayments
 {
   "Amount": 20,
-  "InvestorProductId": 3230 ------> The InvestorProductId from investorproduct/thisweek endpoint
+  "InvestorProductId": 3230 ------> The InvestorProductId from /investorproducts endpoint
 }
 ```
-
-Sample json response
-```
-{
-  "Moneybox": 20
-}
-```
+Good luck!
