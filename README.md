@@ -12,7 +12,7 @@ Unfortunately this screen has 3 bugs raised by our testers that they want you to
 
 Please re-arrange the views in the LoginActivity to match the expected layout.
 
-![](/images/correct_layout.png)
+![](/images/correct_layout.png | width=200)
 
 ### Bug 2 - Validation is incorrect
 If the input entered by the user is correct then they should see a toast saying “Input is valid!”.  However if it is not correct we should show an error on the field that is incorrect.  Below is the following validation logic:
@@ -38,7 +38,7 @@ There is lots of helpful documentation on Lottie [here](http://airbnb.io/lottie/
 
 ## Part B - Add 2 new screens
 
-We now want to give some useful functionality to our users. To allow them to log into the app, view and edit their account.
+We now want to give some useful functionality to our users. To allow them to log into the app, view and edit their account using our sandbox API.
 
 ### Screen 2 - User accounts screen
 This screen should be shown after the user has successfully logged in and should show have the following functionality:
@@ -72,6 +72,7 @@ A prototype wireframe of all 3 screens is provided as a guideline. You are free 
 Please feel free to refactor the LoginActivity and use any libraries/helper methods to make your life easier.
 
 ## How to Submit your solution:
+ - Clone this repository
  - Create a public repo in github, bitbucket or a suitable alternative and provide a link to the repository.
  - Provide a readme in markdown which details how you solved the bugs in part A, and explains the structure of your solution in Part B and any libraries that you may have used.
 
