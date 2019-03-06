@@ -12,7 +12,7 @@ Unfortunately this screen has 3 bugs raised by our testers that they want you to
 
 Please re-arrange the views in the LoginActivity to match the expected layout.
 
-![](/images/correct_layout.png | width=200)
+![](/images/correct_layout.png)
 
 ### Bug 2 - Validation is incorrect
 If the input entered by the user is correct then they should see a toast saying “Input is valid!”.  However if it is not correct we should show an error on the field that is incorrect.  Below is the following validation logic:
