@@ -13,7 +13,7 @@ Create a 'light' version of the Moneybox app that will allow existing users to l
 
 A prototype wireframe is provided below and can be used as a guideline. You are free to change any elements of the screen and provide additional information if you wish.
 
-![](https://s3.amazonaws.com/uploads.hipchat.com/402730/2470705/6JJwTcVMpFzsqba/ios%20wireframe.png)
+![](/images/wireframe.png)
 
 ##### What we are looking for:
  - An android application written in either java or kotlin.
