@@ -6,13 +6,13 @@ Create a mini version of the Moneybox app that will allow existing users to logi
 
 In this repository you will find LoginActivity that allows users to enter their username, password and optionally their name.  We have implemented a basic screen for you that validates username, password and name against simple regular expressions but makes no calls to the API.
 
-Unfortunately this screen has 3 bugs raised by our testers that they want you to fix.  They are listed below.  If you are struggling to fix any of these bugs, please give it your best attempt and then move onto the next bug or task.
+Unfortunately this screen has 3 bugs raised by our testers that they want you to fix and are listed below.  If you are struggling to fix any of these bugs, please give it your best attempt and then move onto the next bug or task.
 
 ### Bug 1 - Layout does not look as expected
 
 Please re-arrange the views in the LoginActivity to match the expected layout.
 
-Expected Layout:
+![](/images/correct_layout.png)
 
 ### Bug 2 - Validation is incorrect
 If the input entered by the user is correct then they should see a toast saying “Input is valid!”.  However if it is not correct we should show an error on the field that is incorrect.  Below is the following validation logic:
@@ -25,14 +25,14 @@ There is some validation logic in LoginActivity, but it is currently incorrect. 
 
 ### Bug 3 - Animation is looping incorrectly
 
-Above the login button is an animation of an owl and a pig.  We would like this animation to play every time the user opens the activity and then loop indefinitely.  The logic for this animation should be as follows:
+Above the login button is an animation of an owl and a pig.  We would like this animation to play every time the user starts the activity and then loop indefinitely.  The logic for this animation should be as follows:
 
 - The animation should start from frame **0** to **109** when the user first starts the activity.  See below for animation.
 ![](/images/firstpig.gif)
 - When the first stage of the animation has finished it should then loop from frame **131** to **158** continuously.  See below for animation.<br/>
 ![](/images/secondpig.gif)
 
-To create animation in the app we use a helpful library called Lottie.  This has been added to the project for you, but currently it just plays the animation once and then stops.  Please implement the logic as described above.
+To create animation in our app we use a helpful library called Lottie.  This has been added to the project for you, but currently it just plays the animation once and then stops.  Please implement the logic as described above.
 
 There is lots of helpful documentation on Lottie [here](http://airbnb.io/lottie/android/android.html#sample-app).  Please take a look at this page for information on how to loop the animation, play from a min and max frame and detect when an animation ends.
 
@@ -59,7 +59,7 @@ A prototype wireframe of all 3 screens is provided as a guideline. You are free 
 ![](/images/wireframe.png)
 
 ## What we are looking for:
- - An android application written in either Java or kotlin.
+ - An android application written in either Java or Kotlin.
  - Demonstration of coding style and design patterns.
  - Knowledge of common android libraries and any others that you find useful.
  - Storage of data between screens.
@@ -69,7 +69,7 @@ A prototype wireframe of all 3 screens is provided as a guideline. You are free 
  - The application must run on Android 5.0 and above.
  - The application must compile and run in Android Studio.
 
-Please feel free to refactor the LoginActivity or use any libraries/helper methods to make your life easier.
+Please feel free to refactor the LoginActivity and use any libraries/helper methods to make your life easier.
 
 ## How to Submit your solution:
  - Create a public repo in github, bitbucket or a suitable alternative and provide a link to the repository.
@@ -79,7 +79,9 @@ Please feel free to refactor the LoginActivity or use any libraries/helper metho
 This a brief summary of the api endpoints in the moneybox sandbox environment. There a lot of other additional properties from the json responses that are not relevant, but you must use these endpoints to retrieve the information needed for this application.
 
 #### Base URL & Test User
-The base URL for the moneybox sandbox environment is `https://api-test01.moneyboxapp.com/` . You can log into test your app using the following user:
+The base URL for the moneybox sandbox environment is `https://api-test01.moneyboxapp.com/`.
+You can log into test your app using the following user:
+
 |  Username          | Password         |
 | ------------- | ------------- |
 | test+android@moneyboxapp.com  | P455word12  |
@@ -92,7 +94,7 @@ In order to make requests https must be used and the following headers must be i
 | ------------- | ------------- |
 | AppId  | 3a97b932a9d449c981b595  |
 | Content-Type  | application/json  |
-| appVersion | 4.11.0 |
+| appVersion | 5.10.0 |
 | apiVersion | 3.0.0 |
 
 #### Authentication
