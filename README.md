@@ -29,8 +29,7 @@ Above the login button is an animation of an owl and a pig.  We would like this 
 
 - The animation should start from frame **0** to **109** when the user first starts the activity.  See below for animation.
 ![](/images/firstpig.gif)
-- When the first stage of the animation has finished it should then loop from frame **131** to **158** continuously.  See below for animation.
-
+- When the first stage of the animation has finished it should then loop from frame **131** to **158** continuously.  See below for animation.<br/>
 ![](/images/secondpig.gif)
 
 To create animation in the app we use a helpful library called Lottie.  This has been added to the project for you, but currently it just plays the animation once and then stops.  Please implement the logic as described above.
