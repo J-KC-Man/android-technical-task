@@ -42,6 +42,7 @@ We now want to give some useful functionality to our users. To allow them to log
 
 ### Screen 2 - User accounts screen
 This screen should be shown after the user has successfully logged in and should show have the following functionality:
+- Display "Hello {name} **only** if they provided it on previous screen"
 - Show the **'TotalPlanValue'** of a user.
 - Show the accounts the user holds, e.g. ISA, GIA, LISA, Pension.
 - Show all of those account's **'PlanValue'**.
