@@ -86,7 +86,7 @@ You can log into test your app using the following user:
 
 |  Username          | Password         |
 | ------------- | ------------- |
-| test+android@moneyboxapp.com  | P455word12  |
+| androidtest@moneyboxapp.com  | P455word12  |
 
 #### Headers
 
