@@ -34,7 +34,7 @@ Above the login button is an animation of an owl and a pig.  We would like this 
 
 To create animation in our app we use a helpful library called Lottie.  This has been added to the project for you, but currently it just plays the animation once and then stops.  Please implement the logic as described above.
 
-There is lots of helpful documentation on Lottie [here](http://airbnb.io/lottie/android/android.html#sample-app).  Please take a look at this page for information on how to loop the animation, play from a min and max frame and detect when an animation ends.
+There is lots of helpful documentation on Lottie [here](http://airbnb.io/lottie/#/android).  Please take a look at this page for information on how to loop the animation, play from a min and max frame and detect when an animation ends.
 
 ## Part B - Add 2 new screens
 
