@@ -3,6 +3,7 @@ package com.example.minimoneybox
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -53,28 +54,58 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun allFieldsValid() : Boolean {
-        var allValid = false
-        
-        if (et_email.text.toString().matches(EMAIL_REGEX.toRegex())) {
-            allValid = true
-        } else {
+    private fun validateEmailField() : Boolean {
+        val emailInput = et_email.text.toString().trim()
+        var isEmailValid = false
+
+        if(emailInput.isEmpty()) {
+            til_email.error = getString(R.string.email_address_empty)
+        } else if(!emailInput.matches(EMAIL_REGEX)) {
             til_email.error = getString(R.string.email_address_error)
+        } else {
+            til_email.error = null
+            isEmailValid = true
         }
 
-        if (Pattern.matches(PASSWORD_REGEX, et_password.text.toString())) {
-            allValid = true
-        } else {
+        return isEmailValid
+    }
+
+    private fun validatePasswordField() : Boolean {
+        val passwordInput = et_password.text.toString().trim()
+        var isPasswordValid = false
+
+        if(passwordInput.isEmpty()) {
+            til_password.error = getString(R.string.password_empty)
+        } else if(!passwordInput.matches(PASSWORD_REGEX)) {
             til_password.error = getString(R.string.password_error)
-        }
-
-        if (Pattern.matches(NAME_REGEX, et_password.text.toString())) {
-            allValid = true
         } else {
-            til_name.error = getString(R.string.full_name_error)
+            til_password.error = null
+            isPasswordValid = true
         }
 
-        return allValid
+        return isPasswordValid
+    }
+
+    private fun validateNameField() : Boolean {
+        val nameInput = et_name.text.toString().trim()
+        var isNameValid = false
+
+        if(nameInput.isNotEmpty() and !nameInput.matches(NAME_REGEX)) {
+            til_name.error = getString(R.string.full_name_error)
+        } else {
+            til_name.error = null
+            isNameValid = true
+        }
+
+        return isNameValid
+    }
+
+    private fun allFieldsValid() : Boolean {
+
+        if (!validateEmailField() or !validatePasswordField() or !validateNameField()) {
+            return false
+        }
+        return true
     }
 
     private fun setupAnimation() {
@@ -82,9 +113,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     companion object {
-        val EMAIL_REGEX = "[^@]+@[^.]+\\..+"
-        val NAME_REGEX = "[a-zA-Z]{6,30}"
-        val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z]).{10,50}$"
+        val EMAIL_REGEX = "[^@]+@[^.]+\\..+".toRegex()
+        val NAME_REGEX = "[a-zA-Z]{6,30}".toRegex()
+        val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[A-Z]).{10,50}$".toRegex()
         val firstAnim = 0 to 109
         val secondAnim = 131 to 158
     }

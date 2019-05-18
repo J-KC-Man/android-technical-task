@@ -8,7 +8,9 @@
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="email_address_error">Please enter a correct email address</string>
+    <string name="email_address_empty">Email address cannot be empty</string>
     <string name="password_error">Please enter a correct password</string>
+    <string name="password_empty">Password cannot be empty</string>
     <string name="full_name_error">Please enter your full name</string>
     <string name="input_valid">Input is valid!</string>
 </resources>
