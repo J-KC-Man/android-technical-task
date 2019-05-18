@@ -55,8 +55,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun allFieldsValid() : Boolean {
         var allValid = false
-
-        if (Pattern.matches(EMAIL_REGEX, et_email.text.toString())) {
+        
+        if (et_email.text.toString().matches(EMAIL_REGEX.toRegex())) {
             allValid = true
         } else {
             til_email.error = getString(R.string.email_address_error)
@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         if (Pattern.matches(NAME_REGEX, et_password.text.toString())) {
             allValid = true
         } else {
-            til_email.error = getString(R.string.full_name_error)
+            til_name.error = getString(R.string.full_name_error)
         }
 
         return allValid
