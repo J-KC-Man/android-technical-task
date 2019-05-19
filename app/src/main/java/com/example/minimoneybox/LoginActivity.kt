@@ -1,5 +1,6 @@
 package com.example.minimoneybox
 
+import android.animation.ValueAnimator
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import java.util.regex.Pattern
 
 /**
@@ -109,7 +111,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupAnimation() {
+        pigAnimation.setMinAndMaxFrame(firstAnim.first, firstAnim.second)
         pigAnimation.playAnimation()
+
+        pigAnimation.addAnimatorUpdateListener {
+            if (pigAnimation.frame == firstAnim.second) {
+                pigAnimation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
+                pigAnimation.repeatCount = LottieDrawable.INFINITE
+            }
+        }
     }
 
     companion object {
