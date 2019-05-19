@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -34,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        Log.i("pigAnimation","animation started")
         setupAnimation()
     }
 
@@ -120,6 +122,18 @@ class LoginActivity : AppCompatActivity() {
                 pigAnimation.repeatCount = LottieDrawable.INFINITE
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i("pigAnimation","animation paused")
+        pigAnimation.pauseAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i("pigAnimation","animation resumed")
+        pigAnimation.resumeAnimation()
     }
 
     companion object {
