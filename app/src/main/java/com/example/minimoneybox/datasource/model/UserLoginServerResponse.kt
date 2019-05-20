@@ -1,5 +1,7 @@
 package com.example.minimoneybox.datasource.model
 
+import com.google.gson.annotations.SerializedName
+
 data class UserLoginServerResponse(
-    val Session : Map<String, LoginSession>
+    @SerializedName("Session") val Session : LoginSession
 )

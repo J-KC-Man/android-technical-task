@@ -20,6 +20,6 @@ interface ApiService {
         "appVersion: 5.10.0",
         "apiVersion: 3.0.0"
     )
-    @POST("/users/login")
+    @POST("users/login")
     fun login(@Body userLogin: UserLogin) : Deferred<Response<UserLoginServerResponse>>
 }
