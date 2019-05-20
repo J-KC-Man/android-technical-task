@@ -1,6 +1,5 @@
 package com.example.minimoneybox.datasource
 
-import android.util.Log
 import com.example.minimoneybox.datasource.model.UserLogin
 import java.io.IOException
 
@@ -32,19 +31,15 @@ class RemoteDataSource(private val apiService: ApiService) {
     suspend fun login(email: String, password: String): Result<String> {
 
         val userLogin = UserLogin(email, password, Idfa = "ANYTHING")
-
         val request = apiService.login(userLogin)
 
-        val response = request.await() // wait for result
+        val response = request.await()
         if (response.isSuccessful) {
-            //Do something with response e.g show to the UI.
-            val jsonresponse = response.body()
 
-           // Log.i("RemoteDatasource", jsonresponse.toString())
+            val serverResponse = response.body()
+            val bearerToken = serverResponse?.Session?.BearerToken
 
-
-
-            return Result.Success(jsonresponse.toString())
+            return Result.Success(bearerToken)
         } else {
             return Result.Error(IOException("Error ${response.code()} occurred!"))
         }
