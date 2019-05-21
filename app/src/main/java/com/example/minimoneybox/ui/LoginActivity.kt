@@ -1,11 +1,10 @@
-package com.example.minimoneybox
+package com.example.minimoneybox.ui
 
-import android.animation.ValueAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.textfield.TextInputLayout
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -13,12 +12,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
+import com.example.minimoneybox.R
 import com.example.minimoneybox.datasource.ApiServiceGenerator
 import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.viewmodel.LoginViewModel
 import com.example.minimoneybox.viewmodel.ViewModelFactory
-import java.util.regex.Pattern
 
 /**
  * A login screen that offers login via email/password.
@@ -46,7 +45,11 @@ class LoginActivity : AppCompatActivity() {
         viewModel.bearerToken.observe(this, Observer {
 
             Log.i("LoginActivity token:", it)
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this@LoginActivity, UserAccountsActivity::class.java)
+            intent.putExtra("bearerToken", it)
+            startActivity(intent)
         })
 
         viewModel.error.observe(this, Observer {
