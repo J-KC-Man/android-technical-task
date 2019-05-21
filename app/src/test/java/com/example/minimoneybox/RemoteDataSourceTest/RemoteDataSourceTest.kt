@@ -5,6 +5,7 @@ import com.example.minimoneybox.datasource.ApiServiceGenerator
 import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.datasource.Result
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +32,6 @@ class RemoteDataSourceTest {
 
         // act
         val result = runBlocking { _sut.login(email = "androidtest@moneyboxapp.com", password =  "P455word12") }
-
         // assert
         assertThat(result, instanceOf(Result.Success::class.java))
     }
@@ -47,5 +47,15 @@ class RemoteDataSourceTest {
         assertEquals(expected.toString(), result.toString())
     }
 
+    @Test
+    fun getInvestorProducts_Success() {
 
+        val token = "JcC+Rg8G/0i4GmPup9T3TPY7EsHkr2i4/4qiqBN/OLI="
+        val expected =""
+        val result = runBlocking { _sut.getInvestorProducts(bearerToken = "Bearer $token") }
+
+        // assert
+        // assertEquals() can be executed synchronously after the code inside of the runBlocking() method.
+        assertEquals(expected, result.toString())
+    }
 }

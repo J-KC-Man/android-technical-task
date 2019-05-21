@@ -1,7 +1,8 @@
 package com.example.minimoneybox.datasource
 
-import com.example.minimoneybox.datasource.model.LoginFailure
+import com.example.minimoneybox.datasource.model.FailedRequest
 import com.example.minimoneybox.datasource.model.UserLogin
+import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
 import com.google.gson.Gson
 import java.io.IOException
 
@@ -46,9 +47,30 @@ class RemoteDataSource(private val apiService: ApiService) {
             val gson = Gson()
 
             // Deserialise Json
-            val errorResponse: LoginFailure? = gson.fromJson(
-                response.errorBody()?.charStream(), // processe response as a stream
-                LoginFailure::class.java)
+            val errorResponse: FailedRequest? = gson.fromJson(
+                response.errorBody()?.charStream(), // process response as a stream
+                FailedRequest::class.java)
+
+            return Result.Error(IOException("${errorResponse?.Message}"))
+        }
+    }
+
+    suspend fun getInvestorProducts(bearerToken : String) : Result<AllInvestorProductData>{
+        val request = apiService.getUserAccounts(bearerToken)
+
+        val response = request.await()
+        if (response.isSuccessful) {
+
+            val serverResponse = response.body()
+
+            return Result.Success(serverResponse)
+        } else {
+            val gson = Gson()
+
+            // Deserialise Json
+            val errorResponse: FailedRequest? = gson.fromJson(
+                response.errorBody()?.charStream(), // process response as a stream
+                FailedRequest::class.java)
 
             return Result.Error(IOException("${errorResponse?.Message}"))
         }
