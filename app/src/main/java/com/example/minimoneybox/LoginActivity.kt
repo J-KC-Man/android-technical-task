@@ -1,22 +1,32 @@
 package com.example.minimoneybox
 
 import android.animation.ValueAnimator
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TextInputLayout
+import com.google.android.material.textfield.TextInputLayout
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
+import com.example.minimoneybox.datasource.ApiServiceGenerator
+import com.example.minimoneybox.datasource.RemoteDataSource
+import com.example.minimoneybox.repository.Repository
+import com.example.minimoneybox.viewmodel.LoginViewModel
+import com.example.minimoneybox.viewmodel.ViewModelFactory
 import java.util.regex.Pattern
 
 /**
  * A login screen that offers login via email/password.
  */
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var factory : ViewModelFactory
+    private lateinit var viewModel : LoginViewModel
 
     lateinit var btn_sign_in : Button
     lateinit var til_email : TextInputLayout
@@ -30,6 +40,20 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        factory = ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
+        viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+        viewModel.bearerToken.observe(this, Observer {
+
+            Log.i("LoginActivity token:", it)
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
+
+
         setupViews()
     }
 
@@ -51,11 +75,10 @@ class LoginActivity : AppCompatActivity() {
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
-                Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
+               // Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
+                viewModel.makeLoginCall(et_email.text.toString().trim(), et_password.text.toString().trim())
             }
         }
-
-
     }
 
     private fun validateEmailField() : Boolean {
