@@ -1,6 +1,8 @@
 package com.example.minimoneybox.datasource
 
+import com.example.minimoneybox.datasource.model.LoginFailure
 import com.example.minimoneybox.datasource.model.UserLogin
+import com.google.gson.Gson
 import java.io.IOException
 
 /*
@@ -41,7 +43,14 @@ class RemoteDataSource(private val apiService: ApiService) {
 
             return Result.Success(bearerToken)
         } else {
-            return Result.Error(IOException("Error ${response.code()} occurred!"))
+            val gson = Gson()
+
+            // Deserialise Json
+            val errorResponse: LoginFailure? = gson.fromJson(
+                response.errorBody()?.charStream(), // processe response as a stream
+                LoginFailure::class.java)
+
+            return Result.Error(IOException("${errorResponse?.Message}"))
         }
     }
 }

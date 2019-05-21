@@ -9,6 +9,7 @@ import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Before
 import org.junit.Test
 import org.junit.Assert.*
+import java.io.IOException
 
 class RemoteDataSourceTest {
 
@@ -35,6 +36,16 @@ class RemoteDataSourceTest {
         assertThat(result, instanceOf(Result.Success::class.java))
     }
 
+    @Test
+    fun login_failure() {
+
+        val expected = Result.Error(IOException("Incorrect email address or password. Please check and try again."))
+        // act
+        val result = runBlocking { _sut.login(email = "androidtest@moneyboxapp.com", password =  "P455word12e") }
+
+        // assert
+        assertEquals(expected.toString(), result.toString())
+    }
 
 
 }
