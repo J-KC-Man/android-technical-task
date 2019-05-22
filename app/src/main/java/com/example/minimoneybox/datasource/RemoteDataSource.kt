@@ -55,8 +55,14 @@ class RemoteDataSource(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getInvestorProducts(bearerToken : String) : Result<AllInvestorProductData>{
-        val request = apiService.getUserAccounts(bearerToken)
+    suspend fun getInvestorProductsSafeCall(
+        bearerToken : String?) = safeApiCall(
+        call = { getInvestorProducts(bearerToken) },
+        errorMessage = "Unable to retrieve data, please login again"
+    )
+
+    suspend fun getInvestorProducts(bearerToken : String?) : Result<AllInvestorProductData>{
+        val request = apiService.getUserAccounts("Bearer $bearerToken")
 
         val response = request.await()
         if (response.isSuccessful) {

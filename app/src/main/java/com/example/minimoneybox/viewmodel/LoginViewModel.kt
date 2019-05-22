@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
 
-    //private val repository: Repository = Repository(RemoteDataSource(ApiServiceGenerator.createService()))
     private val _bearerToken = MutableLiveData<String>()
     private val _error = MutableLiveData<String>()
 

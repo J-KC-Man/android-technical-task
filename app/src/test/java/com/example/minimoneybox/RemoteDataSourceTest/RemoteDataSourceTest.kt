@@ -52,7 +52,7 @@ class RemoteDataSourceTest {
 
         val token = "JcC+Rg8G/0i4GmPup9T3TPY7EsHkr2i4/4qiqBN/OLI="
         val expected =""
-        val result = runBlocking { _sut.getInvestorProducts(bearerToken = "Bearer $token") }
+        val result = runBlocking { _sut.getInvestorProducts(bearerToken = token) }
 
         // assert
         // assertEquals() can be executed synchronously after the code inside of the runBlocking() method.
