@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.bearerToken.observe(this, Observer {
 
             Log.i("LoginActivity token:", it)
-           // Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this@LoginActivity, UserAccountsActivity::class.java)
             intent.putExtra("bearerToken", it)
@@ -61,7 +60,6 @@ class LoginActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
-
 
         setupViews()
     }

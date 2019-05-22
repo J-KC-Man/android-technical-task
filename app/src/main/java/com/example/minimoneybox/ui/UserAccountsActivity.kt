@@ -24,6 +24,7 @@ class UserAccountsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_accounts)
+        setSupportActionBar(findViewById(R.id.user_accounts_toolbar))
 
         val bearerToken = intent.extras?.getString("bearerToken")
         Toast.makeText(this, bearerToken, Toast.LENGTH_LONG).show()
