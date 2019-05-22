@@ -40,6 +40,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Tell the user if token has become invalid
+        val message = intent.extras?.getString("tokenInvalid")
+        if(!message.isNullOrEmpty()) {
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
+
         factory = ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         viewModel.bearerToken.observe(this, Observer {

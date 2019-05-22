@@ -1,5 +1,6 @@
 package com.example.minimoneybox.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -33,6 +34,13 @@ class UserAccountsActivity : AppCompatActivity() {
         viewModel.userAccountData.observe(this, Observer {
             userAccountsData = it
             setupViews(userAccountsData)
+        })
+
+        viewModel.error.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            val intent = Intent(this@UserAccountsActivity, LoginActivity::class.java)
+            intent.putExtra("tokenInvalid", it)
+            startActivity(intent)
         })
     }
 
