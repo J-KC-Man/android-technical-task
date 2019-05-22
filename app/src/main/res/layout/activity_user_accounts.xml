@@ -10,52 +10,60 @@
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/user_accounts_toolbar"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="56dp"
             android:background="@color/colorAccent"
             android:elevation="4dp"
             android:theme="@style/AppTheme"
             app:popupTheme="@style/AppTheme"
+            app:title="@string/user_accounts_name"
             app:titleTextColor="@color/white"
-            android:layout_marginBottom="7dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/greeting_textView" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_marginTop="1dp" android:layout_marginBottom="19dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/greeting_textView"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
     <TextView
             tools:text="Hello"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/greeting_textView"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" app:layout_constraintTop_toBottomOf="@+id/user_accounts_toolbar"
-            app:layout_constraintBottom_toTopOf="@+id/planValue_textView"/>
+            android:layout_marginStart="11dp" app:layout_constraintTop_toBottomOf="@+id/user_accounts_toolbar"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/planValue_textView"/>
     <TextView
             tools:text="Total value is £12345"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/planValue_textView"
-            app:layout_constraintStart_toStartOf="@+id/greeting_textView"
-            app:layout_constraintTop_toBottomOf="@+id/greeting_textView" android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/account1_cardView"/>
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="12dp" app:layout_constraintTop_toBottomOf="@+id/greeting_textView"
+            android:layout_marginBottom="32dp" app:layout_constraintBottom_toTopOf="@+id/account1_cardView"
+            android:layout_marginTop="8dp"/>
 
     <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/account1_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/planValue_textView"
+            app:layout_constraintTop_toBottomOf="@+id/planValue_textView" android:layout_marginBottom="32dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/account2_cardView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginBottom="16dp">
+            android:layout_marginStart="12dp" android:layout_marginEnd="12dp" app:cardElevation="8dp"
+            app:cardCornerRadius="8dp" android:clickable="true">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" android:padding="10dp">
 
             <TextView
+                    android:id="@+id/account1_accountName_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Stocks and Shares ISA"/>
+                    android:theme="@style/AccountName"
+                    tools:text="Stocks and Shares ISA" android:textSize="22sp" android:clickable="false"/>
 
             <TextView
+                    android:id="@+id/account1_accountDetails_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Plan Value: £1000 \nMoneybox: £300"/>
@@ -68,22 +76,27 @@
             android:id="@+id/account2_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/account1_cardView" android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/account1_cardView" android:layout_marginBottom="36dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/account3_cardView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginEnd="16dp">
+            android:layout_marginStart="11dp" android:layout_marginEnd="11dp" app:cardElevation="8dp"
+            app:cardCornerRadius="8dp" android:clickable="true">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" android:padding="10dp">
 
             <TextView
+                    android:id="@+id/account2_accountName_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Stocks and Shares ISA"/>
+                    tools:text="Stocks and Shares ISA"
+                    android:theme="@style/AccountName"
+                    android:textSize="22sp"/>
 
             <TextView
+                    android:id="@+id/account2_accountDetails_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Plan Value: £1000 \nMoneybox: £300"/>
@@ -96,22 +109,25 @@
             android:id="@+id/account3_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/account2_cardView" android:layout_marginBottom="412dp"
+            app:layout_constraintTop_toBottomOf="@+id/account2_cardView" android:layout_marginBottom="250dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginEnd="16dp">
+            android:layout_marginStart="10dp" android:layout_marginEnd="10dp" app:cardElevation="8dp"
+            app:cardCornerRadius="8dp" android:clickable="true">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical" android:padding="10dp">
 
             <TextView
+                    android:id="@+id/account3_accountName_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Stocks and Shares ISA"/>
+                    tools:text="Stocks and Shares ISA" android:textSize="22sp"/>
 
             <TextView
+                    android:id="@+id/account3_accountDetails_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Plan Value: £1000 \nMoneybox: £300"/>

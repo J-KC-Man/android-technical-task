@@ -14,4 +14,9 @@
     <string name="password_empty">Password cannot be empty</string>
     <string name="full_name_error">Please enter your full name</string>
     <string name="input_valid">Input is valid!</string>
+
+    <!-- Strings for User Accounts screen -->
+    <string name="greeting_message">Hello %1$s</string>
+    <string name="total_value">Total Value: %1$s</string>
+    <string name="account_detail">Plan Value: £%1$s\nMoneybox: £%2$s</string>
 </resources>
