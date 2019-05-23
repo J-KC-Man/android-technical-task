@@ -5,14 +5,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import com.google.android.material.textfield.TextInputLayout
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
 import com.example.minimoneybox.R
 import com.example.minimoneybox.datasource.ApiServiceGenerator
@@ -20,6 +16,7 @@ import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.viewmodel.LoginViewModel
 import com.example.minimoneybox.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.activity_login.*
 
 const val BEARER_TOKEN_DEFAULT_SHARED_PREF = "bearer_token"
 const val USERNAME_DEFAULT_SHARED_PREF = "username"
@@ -33,14 +30,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences : SharedPreferences
 
-    lateinit var btn_sign_in : Button
-    lateinit var til_email : TextInputLayout
-    lateinit var et_email : EditText
-    lateinit var til_password : TextInputLayout
-    lateinit var et_password : EditText
-    lateinit var til_name : TextInputLayout
-    lateinit var et_name : EditText
-    lateinit var pigAnimation : LottieAnimationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,14 +75,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        btn_sign_in = findViewById(R.id.btn_sign_in)
-        til_email = findViewById(R.id.til_email)
-        et_email = findViewById(R.id.et_email)
-        til_password = findViewById(R.id.til_password)
-        et_password = findViewById(R.id.et_password)
-        til_name = findViewById(R.id.til_name)
-        et_name = findViewById(R.id.et_name)
-        pigAnimation = findViewById(R.id.animation)
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
@@ -157,13 +138,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setupAnimation() {
-        pigAnimation.setMinAndMaxFrame(firstAnim.first, firstAnim.second)
-        pigAnimation.playAnimation()
+        animation.setMinAndMaxFrame(firstAnim.first, firstAnim.second)
+        animation.playAnimation()
 
-        pigAnimation.addAnimatorUpdateListener {
-            if (pigAnimation.frame == firstAnim.second) {
-                pigAnimation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
-                pigAnimation.repeatCount = LottieDrawable.INFINITE
+        animation.addAnimatorUpdateListener {
+            if (animation.frame == firstAnim.second) {
+                animation.setMinAndMaxFrame(secondAnim.first, secondAnim.second)
+                animation.repeatCount = LottieDrawable.INFINITE
             }
         }
     }
@@ -171,13 +152,13 @@ class LoginActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         Log.i("pigAnimation","animation paused")
-        pigAnimation.pauseAnimation()
+        animation.pauseAnimation()
     }
 
     override fun onResume() {
         super.onResume()
         Log.i("pigAnimation","animation resumed")
-        pigAnimation.resumeAnimation()
+        animation.resumeAnimation()
     }
 
     companion object {
