@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        hideProgressBar()
         // Tell the user if token has become invalid
         val message = intent.extras?.getString("tokenInvalid")
         if(!message.isNullOrEmpty()) {
@@ -47,7 +48,8 @@ class LoginActivity : AppCompatActivity() {
             ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         viewModel.bearerToken.observe(this, Observer {
-
+            btn_sign_in.isEnabled = true
+            hideProgressBar()
             saveData(sharedPreferences, it, et_name.text.toString())
 
             val intent = Intent(this@LoginActivity, UserAccountsActivity::class.java)
@@ -55,6 +57,8 @@ class LoginActivity : AppCompatActivity() {
         })
 
         viewModel.error.observe(this, Observer {
+            btn_sign_in.isEnabled = true
+            hideProgressBar()
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
 
@@ -79,9 +83,15 @@ class LoginActivity : AppCompatActivity() {
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
+                btn_sign_in.isEnabled = false
+                login_progressBar.visibility = View.VISIBLE
                 viewModel.makeLoginCall(et_email.text.toString().trim(), et_password.text.toString().trim())
             }
         }
+    }
+
+    private fun hideProgressBar() {
+        login_progressBar.visibility = View.INVISIBLE
     }
 
     private fun validateEmailField() : Boolean {
