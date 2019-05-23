@@ -1,8 +1,10 @@
 package com.example.minimoneybox.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import com.google.android.material.textfield.TextInputLayout
 import android.util.Log
 import android.widget.Button
@@ -19,6 +21,8 @@ import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.viewmodel.LoginViewModel
 import com.example.minimoneybox.viewmodel.ViewModelFactory
 
+const val BEARER_TOKEN_DEFAULT_SHARED_PREF = "bearer_token"
+const val USERNAME_DEFAULT_SHARED_PREF = "username"
 /**
  * A login screen that offers login via email/password.
  */
@@ -26,6 +30,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var factory : ViewModelFactory
     private lateinit var viewModel : LoginViewModel
+
+    private lateinit var sharedPreferences : SharedPreferences
 
     lateinit var btn_sign_in : Button
     lateinit var til_email : TextInputLayout
@@ -46,14 +52,15 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
         factory = ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         viewModel.bearerToken.observe(this, Observer {
 
-            Log.i("LoginActivity token:", it)
+            saveData(sharedPreferences, it, et_name.text.toString())
 
             val intent = Intent(this@LoginActivity, UserAccountsActivity::class.java)
-            intent.putExtra("bearerToken", it)
             startActivity(intent)
         })
 
@@ -70,6 +77,14 @@ class LoginActivity : AppCompatActivity() {
         setupAnimation()
     }
 
+    private fun saveData(sharedPreferences: SharedPreferences, bearerToken: String, name: String) {
+        sharedPreferences
+            .edit()
+            .putString(BEARER_TOKEN_DEFAULT_SHARED_PREF, bearerToken)
+            .putString(USERNAME_DEFAULT_SHARED_PREF, name)
+            .apply()
+    }
+
     private fun setupViews() {
         btn_sign_in = findViewById(R.id.btn_sign_in)
         til_email = findViewById(R.id.til_email)
@@ -82,7 +97,6 @@ class LoginActivity : AppCompatActivity() {
 
         btn_sign_in.setOnClickListener {
             if (allFieldsValid()) {
-               // Toast.makeText(this, R.string.input_valid, Toast.LENGTH_LONG).show()
                 viewModel.makeLoginCall(et_email.text.toString().trim(), et_password.text.toString().trim())
             }
         }
