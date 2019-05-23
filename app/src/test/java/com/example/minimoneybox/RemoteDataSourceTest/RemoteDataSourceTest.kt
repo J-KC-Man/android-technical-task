@@ -58,4 +58,18 @@ class RemoteDataSourceTest {
         // assertEquals() can be executed synchronously after the code inside of the runBlocking() method.
         assertEquals(expected, result.toString())
     }
+
+    @Test
+    fun addOneOffPayment_Success() {
+
+        val token = "+PbgiGVnzdJtwJNol25B2ianj5lZTv7BFIqNhtCS3ZY="
+        val amount = "10"
+        val InvestorProductId = "3760"
+        val expected =""
+        val result = runBlocking { _sut.addOneOffPayment(token, amount, InvestorProductId) }
+
+        // assert
+        // assertEquals() can be executed synchronously after the code inside of the runBlocking() method.
+        assertEquals(expected, result.toString())
+    }
 }
