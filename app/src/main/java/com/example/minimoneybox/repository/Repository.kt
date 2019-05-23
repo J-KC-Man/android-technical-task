@@ -3,7 +3,7 @@ package com.example.minimoneybox.repository
 import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.datasource.Result
 import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
-import com.example.minimoneybox.datasource.model.payment.PaymentResponse
+import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentResponse
 
 class Repository(private val remoteDataSource: RemoteDataSource) {
 
@@ -15,6 +15,6 @@ class Repository(private val remoteDataSource: RemoteDataSource) {
         remoteDataSource.getInvestorProductsSafeCall(bearerToken)
 
 
-    suspend fun addOneOffPayment(bearerToken : String?, amount : String, investorProductId : String) : Result<PaymentResponse> =
+    suspend fun addOneOffPayment(bearerToken : String?, amount : String, investorProductId : String) : Result<QuickPaymentResponse> =
         remoteDataSource.addOneOffPaymentSafeCall(bearerToken, amount, investorProductId)
 }

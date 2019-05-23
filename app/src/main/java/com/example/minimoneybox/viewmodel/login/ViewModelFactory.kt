@@ -1,4 +1,4 @@
-package com.example.minimoneybox.viewmodel
+package com.example.minimoneybox.viewmodel.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

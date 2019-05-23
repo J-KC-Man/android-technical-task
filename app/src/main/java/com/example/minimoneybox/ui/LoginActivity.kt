@@ -14,8 +14,8 @@ import com.example.minimoneybox.R
 import com.example.minimoneybox.datasource.ApiServiceGenerator
 import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.repository.Repository
-import com.example.minimoneybox.viewmodel.LoginViewModel
-import com.example.minimoneybox.viewmodel.ViewModelFactory
+import com.example.minimoneybox.viewmodel.login.LoginViewModel
+import com.example.minimoneybox.viewmodel.login.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
 
 const val BEARER_TOKEN_DEFAULT_SHARED_PREF = "bearer_token"
@@ -43,7 +43,8 @@ class LoginActivity : AppCompatActivity() {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
-        factory = ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
+        factory =
+            ViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
         viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
         viewModel.bearerToken.observe(this, Observer {
 

@@ -3,8 +3,8 @@ package com.example.minimoneybox.datasource
 import com.example.minimoneybox.datasource.model.FailedRequest
 import com.example.minimoneybox.datasource.model.UserLogin
 import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
-import com.example.minimoneybox.datasource.model.payment.PaymentRequest
-import com.example.minimoneybox.datasource.model.payment.PaymentResponse
+import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentRequest
+import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentResponse
 import com.google.gson.Gson
 import java.io.IOException
 
@@ -95,9 +95,9 @@ class RemoteDataSource(private val apiService: ApiService) {
     suspend fun addOneOffPayment(bearerToken : String?,
                                  amount : String,
                                  investorProductId : String
-    ) : Result<PaymentResponse>{
+    ) : Result<QuickPaymentResponse>{
 
-        val paymentRequest = PaymentRequest(amount, investorProductId)
+        val paymentRequest = QuickPaymentRequest(amount, investorProductId)
         val request = apiService.addOneOffPayment("Bearer $bearerToken", paymentRequest)
 
         val response = request.await()

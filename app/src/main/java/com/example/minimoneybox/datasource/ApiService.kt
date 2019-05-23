@@ -3,8 +3,8 @@ package com.example.minimoneybox.datasource
 import com.example.minimoneybox.datasource.model.UserLogin
 import com.example.minimoneybox.datasource.model.UserLoginServerResponse
 import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
-import com.example.minimoneybox.datasource.model.payment.PaymentRequest
-import com.example.minimoneybox.datasource.model.payment.PaymentResponse
+import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentRequest
+import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -42,6 +42,6 @@ interface ApiService {
     )
     @POST("oneoffpayments")
     fun addOneOffPayment(@Header("Authorization") token : String,
-                         @Body paymentRequest : PaymentRequest)
-            : Deferred<Response<PaymentResponse>>
+                         @Body paymentRequest : QuickPaymentRequest)
+            : Deferred<Response<QuickPaymentResponse>>
 }

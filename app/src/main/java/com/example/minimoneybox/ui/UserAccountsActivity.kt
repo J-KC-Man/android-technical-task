@@ -12,8 +12,8 @@ import com.example.minimoneybox.datasource.ApiServiceGenerator
 import com.example.minimoneybox.datasource.RemoteDataSource
 import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
 import com.example.minimoneybox.repository.Repository
-import com.example.minimoneybox.viewmodel.UserAccountsViewModel
-import com.example.minimoneybox.viewmodel.UserAccountsViewModelFactory
+import com.example.minimoneybox.viewmodel.userAccounts.UserAccountsViewModel
+import com.example.minimoneybox.viewmodel.userAccounts.UserAccountsViewModelFactory
 import kotlinx.android.synthetic.main.activity_user_accounts.*
 
 class UserAccountsActivity : AppCompatActivity() {
@@ -30,7 +30,11 @@ class UserAccountsActivity : AppCompatActivity() {
 
         val bearerToken = getSavedData(BEARER_TOKEN_DEFAULT_SHARED_PREF)
 
-        factory = UserAccountsViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
+        factory = UserAccountsViewModelFactory(
+            Repository(
+                RemoteDataSource(ApiServiceGenerator.createService())
+            )
+        )
         viewModel = ViewModelProviders.of(this, factory).get(UserAccountsViewModel::class.java)
         viewModel.makeUserAccountsCall(bearerToken)
         viewModel.userAccountData.observe(this, Observer {
