@@ -3,6 +3,8 @@ package com.example.minimoneybox.datasource
 import com.example.minimoneybox.datasource.model.UserLogin
 import com.example.minimoneybox.datasource.model.UserLoginServerResponse
 import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
+import com.example.minimoneybox.datasource.model.payment.PaymentRequest
+import com.example.minimoneybox.datasource.model.payment.PaymentResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,7 +22,7 @@ interface ApiService {
         "apiVersion: 3.0.0"
     )
     @POST("users/login")
-    fun login(@Body userLogin: UserLogin) : Deferred<Response<UserLoginServerResponse>>
+    fun login(@Body userLogin : UserLogin) : Deferred<Response<UserLoginServerResponse>>
 
     @Headers(
         "AppId: 3a97b932a9d449c981b595",
@@ -31,4 +33,15 @@ interface ApiService {
     @GET("investorproducts")
     fun getUserAccounts(@Header("Authorization") token : String)
             : Deferred<Response<AllInvestorProductData>>
+
+    @Headers(
+        "AppId: 3a97b932a9d449c981b595",
+        "Content-Type: application/json",
+        "appVersion: 5.10.0",
+        "apiVersion: 3.0.0"
+    )
+    @POST("oneoffpayments")
+    fun addOneOffPayment(@Header("Authorization") token : String,
+                         @Body paymentRequest : PaymentRequest)
+            : Deferred<Response<PaymentResponse>>
 }
