@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:theme="@style/AccountName"
-                    tools:text="Stocks and Shares ISA" android:textSize="22sp" android:clickable="false"/>
+                    tools:text="Stocks and Shares ISA" />
 
             <TextView
                     android:id="@+id/account1_accountDetails_textView"
@@ -93,8 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Stocks and Shares ISA"
-                    android:theme="@style/AccountName"
-                    android:textSize="22sp"/>
+                    android:theme="@style/AccountName" />
 
             <TextView
                     android:id="@+id/account2_accountDetails_textView"
@@ -125,7 +124,8 @@
                     android:id="@+id/account3_accountName_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Stocks and Shares ISA" android:textSize="22sp"/>
+                    android:theme="@style/AccountName"
+                    tools:text="Stocks and Shares ISA" />
 
             <TextView
                     android:id="@+id/account3_accountDetails_textView"

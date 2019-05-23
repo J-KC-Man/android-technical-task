@@ -87,14 +87,14 @@ class RemoteDataSource(private val apiService: ApiService) {
     suspend fun addOneOffPaymentSafeCall(
         bearerToken : String?,
         amount : String,
-        investorProductId : String) = safeApiCall(
+        investorProductId : String?) = safeApiCall(
         call = { addOneOffPayment(bearerToken, amount, investorProductId) },
         errorMessage = "Unable send payment, please login again"
     )
 
     suspend fun addOneOffPayment(bearerToken : String?,
                                  amount : String,
-                                 investorProductId : String
+                                 investorProductId : String?
     ) : Result<QuickPaymentResponse>{
 
         val paymentRequest = QuickPaymentRequest(amount, investorProductId)

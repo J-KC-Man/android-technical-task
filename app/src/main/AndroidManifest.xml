@@ -11,6 +11,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ui.OneOffPaymentActivity">
+        </activity>
         <activity
                 android:name=".ui.UserAccountsActivity"
                 android:label="@string/user_accounts_name"

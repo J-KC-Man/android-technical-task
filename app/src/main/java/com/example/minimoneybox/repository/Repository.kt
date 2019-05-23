@@ -15,6 +15,6 @@ class Repository(private val remoteDataSource: RemoteDataSource) {
         remoteDataSource.getInvestorProductsSafeCall(bearerToken)
 
 
-    suspend fun addOneOffPayment(bearerToken : String?, amount : String, investorProductId : String) : Result<QuickPaymentResponse> =
+    suspend fun addOneOffPayment(bearerToken : String?, amount : String, investorProductId : String?) : Result<QuickPaymentResponse> =
         remoteDataSource.addOneOffPaymentSafeCall(bearerToken, amount, investorProductId)
 }

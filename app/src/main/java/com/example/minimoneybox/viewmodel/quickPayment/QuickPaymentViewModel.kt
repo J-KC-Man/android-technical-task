@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.minimoneybox.datasource.Result
-import com.example.minimoneybox.datasource.model.investorProducts.AllInvestorProductData
-import com.example.minimoneybox.datasource.model.quickPayment.QuickPaymentResponse
 import com.example.minimoneybox.repository.Repository
 import com.example.minimoneybox.viewmodel.login.exhaustive
 import kotlinx.coroutines.launch
@@ -23,7 +21,7 @@ class QuickPaymentViewModel(private val repository: Repository) : ViewModel() {
     val error : LiveData<String>
         get() = _error
 
-    fun makePaymentCall(bearerToken: String?, amount: String, investorProductId: String) {
+    fun makePaymentCall(bearerToken: String?, amount: String, investorProductId: String?) {
         // use extension property lifecycle aware CoroutineScope
         viewModelScope.launch {
             val result = repository.addOneOffPayment(bearerToken, amount, investorProductId)

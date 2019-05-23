@@ -30,16 +30,13 @@ class UserAccountsActivity : AppCompatActivity() {
 
         val bearerToken = getSavedData(BEARER_TOKEN_DEFAULT_SHARED_PREF)
 
-        factory = UserAccountsViewModelFactory(
-            Repository(
-                RemoteDataSource(ApiServiceGenerator.createService())
-            )
-        )
+        factory = UserAccountsViewModelFactory(Repository(RemoteDataSource(ApiServiceGenerator.createService())))
         viewModel = ViewModelProviders.of(this, factory).get(UserAccountsViewModel::class.java)
         viewModel.makeUserAccountsCall(bearerToken)
         viewModel.userAccountData.observe(this, Observer {
             userAccountsData = it
             setupViews(userAccountsData)
+            setupViewClickListeners(userAccountsData)
         })
 
         viewModel.error.observe(this, Observer {
@@ -77,5 +74,38 @@ class UserAccountsActivity : AppCompatActivity() {
             R.string.account_detail,
             data.ProductResponses[2].PlanValue,
             data.ProductResponses[2].Moneybox)
+    }
+
+    private fun setupViewClickListeners(data : AllInvestorProductData) {
+        val account1 = data.ProductResponses[0]
+        val account2 = data.ProductResponses[1]
+        val account3 = data.ProductResponses[2]
+        account1_cardView.setOnClickListener {
+            val intent = Intent(this@UserAccountsActivity, OneOffPaymentActivity::class.java)
+            intent.putExtra("accountName", account1.Product.FriendlyName)
+            intent.putExtra("planValue", account1.PlanValue)
+            intent.putExtra("moneyBox", account1.Moneybox)
+            intent.putExtra("investorProductId", account1.Product.Id)
+            startActivity(intent)
+        }
+
+        account2_cardView.setOnClickListener {
+            val intent = Intent(this@UserAccountsActivity, OneOffPaymentActivity::class.java)
+            intent.putExtra("accountName", account2.Product.FriendlyName)
+            intent.putExtra("planValue", account2.PlanValue)
+            intent.putExtra("moneyBox", account2.Moneybox)
+            intent.putExtra("investorProductId", account2.Product.Id)
+            startActivity(intent)
+        }
+
+        account3_cardView.setOnClickListener {
+            val intent = Intent(this@UserAccountsActivity, OneOffPaymentActivity::class.java)
+            intent.putExtra("accountName", account3.Product.FriendlyName)
+            intent.putExtra("planValue", account3.PlanValue)
+            intent.putExtra("moneyBox", account3.Moneybox)
+            intent.putExtra("investorProductId", account3.Product.Id)
+            startActivity(intent)
+        }
+
     }
 }
