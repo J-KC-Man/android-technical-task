@@ -1,3 +1,43 @@
+# My Solution
+
+## Part A
+
+### Bug 1
+
+I removed all constraints and laid out the elements according to requirements. Then I used a combination of inferring and manually adding constraints. For example, the inferred constraints for the animation were constraint to the parent on the left. I removed this constraint and set bottom margins so that the animation lands on top of the sign in button.
+
+### Bug 2
+
+I wrote separate validation methods for each field.    
+
+### Bug 3
+
+I went to the lottie docs and looked at the looping section. Initially I set the min and max frames to the first stage of the animation. Then I set playAnimation() and it completed the first stage of the animation. Getting it to loop after this stage was a bit trickier.
+Initially I tried to just set the min and max frame and set repeatmode in a sequential manner to get it to loop but the animation just went straight to the looped frames and missed out the first part. It still did this even when I added an if expression that checked for frame 109 before trying to loop.
+I looked into the underlying code (LottieAnimationView) as I found the docs lacking in examples of particular use cases of looping and I also tried to search for examples.
+An example I came across was a playSegments method which I realised was for the web api.
+
+Then I came across another example using addAnimatorUpdateListener and I figured I needed to add that and its callback so the code knows to monitor the progress of the animation while it is animating.
+I added this into the code and put the looping code inside the callback and it worked. I then paused and resumed the animation when the user had the app in the background. 
+
+## Part B
+
+The app leans towards an MVVM architecture with ViewModels for each screen, a repository and a remote datasource.
+
+It uses
+
+- Kotlin
+- Coroutines with Retrofit 2 to fetch data
+- Sealed class to encapsulate errors
+- LiveData which is observed by views
+
+### Some improvements I would make
+
+- Add Dependency Injection to make unit testing easier.
+- Add more Unit and UI tests, implementing Idling resource for api calls.
+- Add a custom interceptor to dynamically add the bearer token for each request, and to log the user out when the token expires.
+
+
 # The Brief:
 
 Create a mini version of the Moneybox app that will allow existing users to login, check their account and add money to their moneybox.
